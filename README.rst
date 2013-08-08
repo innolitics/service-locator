@@ -1,3 +1,4 @@
+===============================
  Python Service Locator v 0.0.2
 ===============================
 
@@ -9,12 +10,14 @@
 - Configuration xml files are not pythonic and are often overcomplicated, class decorators are used instead.
 - All services will be instantiated by the service locator as a singleton.
 
+
 Usage
-=====
+-----
 
 Please see main.py for a sample project. Suppose you have an abstract service class that looks like this:
 
-::
+.. code-block:: python
+
     class MIMERecognizerService(object):
         def recognizes_extension(self, extension):
             pass
@@ -24,7 +27,8 @@ Please see main.py for a sample project. Suppose you have an abstract service cl
 
 Register a service like this:
 
-::
+.. code-block:: python
+
     @ServiceProvider(MIMERecognizerService)
     class PDFRecognizer(MIMERecognizerService):
         def recognizes_extension(self, extension):
@@ -37,7 +41,8 @@ Register a service like this:
 You can register as many services and service providers as you like. To retrieve service providers for a service, use the
 locate function like this:
 
-::
+.. code-block:: python
+
     MIMERecognizers = LocateAll(MIMERecognizerService)
 
 This will get all concrete implementations of the MIMERecognizerService but the dependent module need not know about the
