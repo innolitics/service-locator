@@ -1,6 +1,5 @@
-from MIMERecognizerService import MIMERecognizerService
+from ..MIMERecognizerService import MIMERecognizerService
 from ServiceLocator import ServiceProvider
-
 
 @ServiceProvider(MIMERecognizerService)
 class HTMLRecognizer(MIMERecognizerService):

@@ -1,4 +1,4 @@
-from MIMERecognizerService import MIMERecognizerService
+from ..MIMERecognizerService import MIMERecognizerService
 from ServiceLocator import ServiceProvider
 
 

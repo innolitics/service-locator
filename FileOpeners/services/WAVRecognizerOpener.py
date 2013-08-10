@@ -1,4 +1,4 @@
-from FileOpenerService import FileOpenerService
+from ..FileOpenerService import FileOpenerService
 from ServiceLocator import ServiceProvider
 from MIMERecognizers.MIMERecognizerService import MIMERecognizerService
 
@@ -9,7 +9,7 @@ class WavOpener(FileOpenerService, MIMERecognizerService):
         return mime == "audio/wav"
 
     def open(self, file):
-        print "opening with audio wav editor"
+        print("opening with audio wav editor")
 
     def recognizes_extension(self, extension):
         return extension == ".wav"

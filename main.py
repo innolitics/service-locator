@@ -1,19 +1,17 @@
-from ServiceLocator import LocateAll
-from MIMERecognizers import *
+from ServiceLocator import locate_all,discover_services
 from MIMERecognizers.MIMERecognizerService import MIMERecognizerService
-from FileOpeners import *
 from FileOpeners.FileOpenerService import FileOpenerService
 
-file = "main.htm"
-extension = ".htm"
+discover_services(__file__)
 
-MIMERecognizers = LocateAll(MIMERecognizerService)
+file = "main.htm"
+extension = file[-4:]
+
+MIMERecognizers = locate_all(MIMERecognizerService)
 mimes = [service.get_MIME_type() for service in MIMERecognizers
          if service.recognizes_extension(extension)]
 
-FileOpeners = LocateAll(FileOpenerService)
+FileOpeners = locate_all(FileOpenerService)
 for service in FileOpeners:
     [service.open(file) for mime in mimes
      if service.can_open_mime_type(mime)]
-
-

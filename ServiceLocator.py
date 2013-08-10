@@ -1,4 +1,8 @@
+import os
+import glob
+
 _lookup = {}
+
 
 def ServiceProvider(*services):
     """
@@ -6,6 +10,7 @@ def ServiceProvider(*services):
     It is expected that the class has a no-arg constructor and will be instantiated
     as a singleton.
     """
+
     def realDecorator(clazz):
         instance = clazz()
         for service in services:
@@ -19,14 +24,21 @@ def ServiceProvider(*services):
     return realDecorator
 
 
-def LocateAll(service):
+def locate_all(service):
     list = _lookup.get(service) or []
     return list
 
 
-def Locate(service):
+def locate(service):
     try:
-        return LocateAll(service)[0]
+        return locate_all(service)[0]
     except IndexError:
         return None
 
+
+def discover_services(search_path):
+    dir_path = os.path.dirname(search_path)
+    files = glob.glob(os.path.join(dir_path, '**/services/*.py'))
+    rel_files = [file[len(dir_path) + 1:] for file in files]
+    modules = [rel_file.replace('/', '.')[:-3] for rel_file in rel_files]
+    imported_mods = [__import__(module) for module in modules]

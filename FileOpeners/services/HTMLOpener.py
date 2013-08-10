@@ -1,4 +1,4 @@
-from FileOpenerService import FileOpenerService
+from ..FileOpenerService import FileOpenerService
 from ServiceLocator import ServiceProvider
 
 
@@ -9,4 +9,4 @@ class HTMLOpener(FileOpenerService):
         return mime == "text/html"
 
     def open(self, file):
-        print "opening with google chrome"
+        print("opening with google chrome")

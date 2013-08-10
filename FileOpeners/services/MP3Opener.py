@@ -1,4 +1,4 @@
-from FileOpenerService import FileOpenerService
+from ..FileOpenerService import FileOpenerService
 from ServiceLocator import ServiceProvider
 
 
@@ -9,4 +9,4 @@ class MP3Opener(FileOpenerService):
         return mime == "audio/mp3"
 
     def open(self, file):
-        print "opening with music player"
+        print("opening with music player")

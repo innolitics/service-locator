@@ -1,4 +1,4 @@
-from FileOpenerService import FileOpenerService
+from ..FileOpenerService import FileOpenerService
 from ServiceLocator import ServiceProvider
 
 
@@ -9,4 +9,4 @@ class PDFOpener(FileOpenerService):
         return mime == "application/pdf"
 
     def open(self, file):
-        print "opening with adobe reader"
+        print("opening with adobe reader")
