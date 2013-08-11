@@ -1,9 +1,9 @@
-from ..FileOpenerService import FileOpenerService
-from lookup import ServiceProvider
-from MIMERecognizers.MIMERecognizerService import MIMERecognizerService
+from servicelocator.lookup import service_provider
+from tests.integration.FileOpeners.FileOpenerService import FileOpenerService
+from tests.integration.MIMERecognizers.MIMERecognizerService import MIMERecognizerService
 
 #some classes can be multiple service providers
-@ServiceProvider(FileOpenerService, MIMERecognizerService)
+@service_provider(FileOpenerService, MIMERecognizerService)
 class WavOpener(FileOpenerService, MIMERecognizerService):
     def can_open_mime_type(self, mime):
         return mime == "audio/wav"

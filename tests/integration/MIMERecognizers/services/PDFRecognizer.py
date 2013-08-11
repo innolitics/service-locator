@@ -1,8 +1,8 @@
-from ..MIMERecognizerService import MIMERecognizerService
-from lookup import ServiceProvider
+from servicelocator.lookup import service_provider
+from tests.integration.MIMERecognizers.MIMERecognizerService import MIMERecognizerService
 
 
-@ServiceProvider(MIMERecognizerService)
+@service_provider(MIMERecognizerService)
 class PDFRecognizer(MIMERecognizerService):
     def recognizes_extension(self, extension):
         return extension == ".pdf"

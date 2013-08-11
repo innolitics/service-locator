@@ -1,8 +1,8 @@
-from ..FileOpenerService import FileOpenerService
-from lookup import ServiceProvider
+from servicelocator.lookup import service_provider
+from tests.integration.FileOpeners.FileOpenerService import FileOpenerService
 
 
-@ServiceProvider(FileOpenerService)
+@service_provider(FileOpenerService)
 class PDFOpener(FileOpenerService):
 
     def can_open_mime_type(self, mime):

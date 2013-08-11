@@ -1,14 +1,13 @@
 ===============================
- Python Service Locator v 0.0.3
+ Python Service Locator v 0.1.3
 ===============================
 
-- The service locator pattern is a very simple but useful pattern that can help you manage dependencies.
-- Helps decouple the wiring of dependencies (glue code) from the actual application logic itself.
-- Rather than instantiating a library service yourself, you ask the ecosystem to locate them for you.
+- The service locator pattern is a very simple but useful pattern that helps you remove glue code from application code.
+- Decoupling the wiring of dependencies (glue code) can reduce your lines of code significantly and encourages loose coupling.
 - This allows you to depend on abstractions rather than on concretions, it makes adding additional
   functionality to your application much easier.
 - Configuration xml files are not pythonic and are often overcomplicated, class decorators are used instead.
-- Concrete service implementations should be placed in services folder. All services subfolders will be discovered using
+- Concrete service implementations should be placed in a services folder. All services subfolders will be discovered using
   discover_services function and all containing modules will be auto-loaded.
 - All services will be instantiated by the service locator as a singleton.
 
@@ -31,7 +30,7 @@ Register a service like this:
 
 .. code-block:: python
 
-    @ServiceProvider(MIMERecognizerService)
+    @service_provider(MIMERecognizerService)
     class PDFRecognizer(MIMERecognizerService):
         def recognizes_extension(self, extension):
             return extension == ".pdf"
@@ -44,16 +43,19 @@ You can register as many services and service providers as you like. To retrieve
 locate function like this:
 
 .. code-block:: python
+    from servicelocator.lookup import global_lookup
 
-    MIMERecognizers = LocateAll(MIMERecognizerService)
+    MIMERecognizers = global_lookup.lookup_all(MIMERecognizerService)
 
 This will get all concrete implementations of the MIMERecognizerService but the dependent module need not know about the
 existence of any of these concrete implementations. This makes adding new service providers very easy.
 
+And if you know there is only one implementation of the service:
 
-TODO
-====
+.. code-block:: python
 
-- Think about thread safety. Singletons are currently instantiated in a thread unsafe way.
-- Think about a non-global singleton registry. There may be some use having local service provider registries instead of
-  one global one?
+    from servicelocator.lookup import global_lookup
+
+    MIMERecognizer = global_lookup.lookup(MIMERecognizerService)
+
+
