@@ -15,10 +15,11 @@
 Usage
 -----
 
-Please see main.py for a sample project. Suppose you have an abstract service class that looks like this:
+Please see test/integration/test.py for a sample project. Suppose you have an abstract service class that looks like this:
 
 .. code-block:: python
 
+    #mime_recognizer_service.py
     class MIMERecognizerService(object):
         def recognizes_extension(self, extension):
             pass
@@ -30,6 +31,9 @@ Register a service like this:
 
 .. code-block:: python
 
+    #pdf_recognizer.py
+    from servicelocator.service_discoverer import discover_services
+
     @service_provider(MIMERecognizerService)
     class PDFRecognizer(MIMERecognizerService):
         def recognizes_extension(self, extension):
@@ -37,18 +41,50 @@ Register a service like this:
 
         def get_MIME_type(self):
             return "application/pdf"
+            
 
+You can register as many services and service providers as you like. When you retrieve all MIMERecognizerServices using the 
+lookup_all function, one of the results in the list will be a PDFRecognizer() instance.
 
-You can register as many services and service providers as you like. To retrieve service providers for a service, use the
-locate function like this:
+In order for the service discovery process to find the PDFRecognizer, you need to place it in a services folder. Your 
+directory structure might look something like this (__init__.py's removed for demo purposes):
+
+::
+
+    -root/
+        -main.py
+        -mime_recognizers/
+           -mime_recognizer_service.py
+           -services/
+               -pdf_recognizer.py
+        -file_openers/
+           -file_opener_service.py
+           -services/
+               -pdf_opener.py
+                   
+You discover services like this:
 
 .. code-block:: python
+
+    from servicelocator.service_discoverer import discover_services
+
+     discover_services()
+     
+And thats it. The discover_services will walk the project directory tree and import all python modules inside services folders.
+
+
+To retrieve service providers for a service, use the lookup functions like this:
+
+.. code-block:: python
+
     from servicelocator.lookup import global_lookup
 
     MIMERecognizers = global_lookup.lookup_all(MIMERecognizerService)
 
-This will get all concrete implementations of the MIMERecognizerService but the dependent module need not know about the
-existence of any of these concrete implementations. This makes adding new service providers very easy.
+This will get all concrete implementations of the MIMERecognizerService but the we do not need to know about the
+existence of any of these concrete implementations. Think of it as a software contract, you only need to know
+what goes in and what comes out and the concrete implementation should not matter. 
+This makes adding new service providers in a loosley coupled way very easy .
 
 And if you know there is only one implementation of the service:
 
@@ -57,5 +93,6 @@ And if you know there is only one implementation of the service:
     from servicelocator.lookup import global_lookup
 
     MIMERecognizer = global_lookup.lookup(MIMERecognizerService)
+
 
 
