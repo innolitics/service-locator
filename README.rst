@@ -70,8 +70,7 @@ You discover services like this:
 
      discover_services()
      
-And thats it. The discover_services will walk the project directory tree and import all python modules inside services folders.
-
+And that's it. The discover_services will walk the project directory tree and import all python modules inside services folders.
 
 To retrieve service providers for a service, use the lookup functions like this:
 
@@ -82,9 +81,8 @@ To retrieve service providers for a service, use the lookup functions like this:
     MIMERecognizers = global_lookup.lookup_all(MIMERecognizerService)
 
 This will get all concrete implementations of the MIMERecognizerService but the we do not need to know about the
-existence of any of these concrete implementations. Think of it as a software contract, you only need to know
-what goes in and what comes out and the concrete implementation should not matter. 
-This makes adding new service providers in a loosley coupled way very easy .
+existence of any of these concrete implementations. Adding extra functionality is as simple as dropping a file inside a
+services directory, no additional code is necessary. This makes adding new service providers in a loosely coupled way very easy .
 
 And if you know there is only one implementation of the service:
 

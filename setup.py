@@ -7,4 +7,6 @@ setup(
     license='Apache License',
     description='Dead simple python service locator',
     long_description=open('README.rst').read(),
+    author="Yujan Shrestha",
+    author_email="yshrestha88@gmail.com"
 )
