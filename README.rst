@@ -7,10 +7,8 @@
 - This allows you to depend on abstractions rather than on concretions, it makes adding additional
   functionality to your application much easier.
 - Configuration xml files are not pythonic and are often overcomplicated, class decorators are used instead.
-- Concrete service implementations should be placed in a services folder. All services subfolders will be discovered using
-  discover_services function and all containing modules will be auto-loaded.
-- All services will be instantiated by the service locator as a singleton.
-
+- Very simple, under 100 lines of code.
+- Test suite, got it.
 
 Usage
 -----
