@@ -15,6 +15,14 @@
 Usage
 -----
 
+::
+
+    pip install service-locator
+    
+
+Usage
+-----
+
 Please see test/integration/test.py for a sample project. Suppose you have an abstract service class that looks like this:
 
 .. code-block:: python
