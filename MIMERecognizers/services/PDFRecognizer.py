@@ -1,5 +1,5 @@
 from ..MIMERecognizerService import MIMERecognizerService
-from ServiceLocator import ServiceProvider
+from lookup import ServiceProvider
 
 
 @ServiceProvider(MIMERecognizerService)

@@ -1,5 +1,5 @@
 from ..FileOpenerService import FileOpenerService
-from ServiceLocator import ServiceProvider
+from lookup import ServiceProvider
 from MIMERecognizers.MIMERecognizerService import MIMERecognizerService
 
 #some classes can be multiple service providers
