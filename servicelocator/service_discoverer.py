@@ -10,5 +10,5 @@ def discover_services():
             if os.path.basename(root) == "services" and filename != "__init__.py":
                 matches.append(os.path.join(root, filename))
     rel_files = [file[len(dir_path) + 1:] for file in matches]
-    modules = [rel_file.replace('/', '.')[:-3] for rel_file in rel_files]
+    modules = [rel_file.replace('/', '.').replace('\\', '.')[:-3] for rel_file in rel_files]
     imported_mods = [__import__(module) for module in modules]
